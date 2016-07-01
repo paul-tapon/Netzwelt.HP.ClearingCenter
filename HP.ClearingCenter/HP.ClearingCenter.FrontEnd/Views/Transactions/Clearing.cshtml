@@ -1,0 +1,67 @@
+﻿@model HP.ClearingCenter.FrontEnd.Models.Transactions.ClearingViewModel
+@{
+    ViewBag.Title = Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.Clearing_TitleText);
+    ViewBag.StatusCodes = Model.StatusCodes;
+    ViewBag.ForwardingInstructions = Model.ForwardingInstructions;
+    ViewBag.ClearingView = this.Model;
+}
+
+@section styles {
+    <style type="text/css">
+        .ui-widget button {
+            font-weight: bold !important;
+        }
+        
+        .ui-widget button, .ui-widget {
+            font-family: "HPSimplified_Rg", arial, sans-serif !important;
+        }
+        
+        .ui-widget-overlay {
+            background: none repeat scroll 0 0 #000000;
+            opacity: 0.8;
+        }
+
+        .ui-dialog-titlebar {
+            display: none;
+        }
+    </style>
+}
+
+<article>
+    <header><h1>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.Clearing_TitleText)</h1></header>
+    <p class="intro">
+        @Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.Clearing_IntroText)
+    </p>
+
+    @Html.Partial("_TransactionDetail", Model.TransactionTransport)
+    @Html.Partial("_ClearReceivedProduct", Model.ClearReceivedProductCommand)
+
+</article>
+
+@if (!this.Model.TransactionTransport.IsClearingLocked) {
+    <div>
+        @Html.Partial("_ClearingManualStatus", Model.ClearReceivedProductCommand)
+    </div>
+}
+
+@section scripts {
+
+    @Scripts.Render("~/bundles/jqueryui.js")
+    @Scripts.Render("~/bundles/jqueryval.js")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Application/Views/ClearingView.js")"></script>
+    <script type="text/javascript">
+        (function (jq) {
+            jq(document).ready(function () {
+                var parameters = {
+                    successfulClearingStatusCode: '@Model.SuccessfulClearingStatusCode',
+                    searchProductsJsonUrl: '@Url.Action("SearchJson", "Products")',
+                    validateSelectedProductUrl: '@Url.Action("ValidateClearingProduct", "Transactions")',
+                    isProductCleared : @Model.TransactionTransport.ClearingDate.HasValue.ToString().ToLowerInvariant(),
+                    isClearingLocked: @Model.TransactionTransport.IsClearingLocked.ToString().ToLowerInvariant()
+                };
+                var view = new ClearingView(parameters);
+                view.show();
+            });
+        })(jQuery);
+    </script>
+}

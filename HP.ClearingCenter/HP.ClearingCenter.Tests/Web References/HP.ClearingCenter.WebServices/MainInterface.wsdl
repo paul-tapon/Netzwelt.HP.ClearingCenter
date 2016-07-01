@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices">
+      <s:element name="AdviseClearingCenterProduct">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:AdviseClearingCenterProductRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="AdviseClearingCenterProductRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Order" type="tns:Order" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Order">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MarketingProgramId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryIsoCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OfferId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuoteNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="OrderDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerData" type="tns:ContactAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="Positions" type="tns:ArrayOfOrderPosition" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ContactAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StreetAddress01" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StreetAddress02" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PostalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StateOrProvince" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Phone" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fax" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmailAddress" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfOrderPosition">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="OrderPosition" nillable="true" type="tns:OrderPosition" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="OrderPosition">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TransportNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ProductGroupId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClearingCenterId" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransactionDetailId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Product" type="tns:Product" />
+          <s:element minOccurs="0" maxOccurs="1" name="PickupAddress" type="tns:ContactAddress" />
+          <s:element minOccurs="1" maxOccurs="1" name="PickupDate" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExpectedArrivalDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClearingProcessAttributes" type="tns:ArrayOfCustomAttribute" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Product">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ProductId" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Manufacturer" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Model" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PartNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ManufacturingYear" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryOfOrigin" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Width" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Height" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Length" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LengthUnit" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Weight" nillable="true" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="WeightUnit" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCustomAttribute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CustomAttribute" nillable="true" type="tns:CustomAttribute" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomAttribute">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Key" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AdviseClearingCenterProductResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="AdviseClearingCenterProductResult" type="tns:ResponseResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ResponseResult">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsSuccessful" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorMessages" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ApiAuthenticationToken" type="tns:ApiAuthenticationToken" />
+      <s:complexType name="ApiAuthenticationToken">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ApiKey" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="GetReceivedProducts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:GetProductListRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetProductListRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="MarketingProgramId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryIsoCode" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartDate" nillable="true" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetReceivedProductsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetReceivedProductsResult" type="tns:GetProductListResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="GetProductListResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Transports" type="tns:ArrayOfTransportProcessData" />
+          <s:element minOccurs="0" maxOccurs="1" name="Result" type="tns:ResponseResult" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTransportProcessData">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TransportProcessData" nillable="true" type="tns:TransportProcessData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TransportProcessData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="MarketingProgramId" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="CountryIsoCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OfferId" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="QuoteNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TransportNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ManufacturerName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="SerialNumber" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ForwardingInstruction" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReceivingStatus" type="tns:StatusData" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsReceivingOk" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ReceivingDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReceivedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ReceivingRemarks" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProblemCodeReceiving" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClearingStatus" type="tns:StatusData" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsClearingOk" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ClearingDate" nillable="true" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClearedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ClearingRemarks" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProblemCodeClearing" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ProductGroup" type="tns:ProductGroupData" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StatusData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="IsSuccessful" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Datestamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="UpdatedBy" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Remarks" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ProductGroupData">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Id" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="ExternalCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetClearedProducts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:GetProductListRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClearedProductsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClearedProductsResult" type="tns:GetProductListResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmReceivedProductsReception">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:ConfirmProcessStatusReceptionRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ConfirmProcessStatusReceptionRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="TransportIds" type="tns:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ConfirmReceivedProductsReceptionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmReceivedProductsReceptionResult" type="tns:ResponseResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmClearedProductsReception">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:ConfirmProcessStatusReceptionRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConfirmClearedProductsReceptionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ConfirmClearedProductsReceptionResult" type="tns:ResponseResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Echo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="request" type="tns:EchoRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EchoRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Message" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="EchoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EchoResult" type="tns:ResponseResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="AdviseClearingCenterProductSoapIn">
+    <wsdl:part name="parameters" element="tns:AdviseClearingCenterProduct" />
+  </wsdl:message>
+  <wsdl:message name="AdviseClearingCenterProductSoapOut">
+    <wsdl:part name="parameters" element="tns:AdviseClearingCenterProductResponse" />
+  </wsdl:message>
+  <wsdl:message name="AdviseClearingCenterProductApiAuthenticationToken">
+    <wsdl:part name="ApiAuthenticationToken" element="tns:ApiAuthenticationToken" />
+  </wsdl:message>
+  <wsdl:message name="GetReceivedProductsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetReceivedProducts" />
+  </wsdl:message>
+  <wsdl:message name="GetReceivedProductsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetReceivedProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetReceivedProductsApiAuthenticationToken">
+    <wsdl:part name="ApiAuthenticationToken" element="tns:ApiAuthenticationToken" />
+  </wsdl:message>
+  <wsdl:message name="GetClearedProductsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClearedProducts" />
+  </wsdl:message>
+  <wsdl:message name="GetClearedProductsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClearedProductsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetClearedProductsApiAuthenticationToken">
+    <wsdl:part name="ApiAuthenticationToken" element="tns:ApiAuthenticationToken" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmReceivedProductsReceptionSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfirmReceivedProductsReception" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmReceivedProductsReceptionSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfirmReceivedProductsReceptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmReceivedProductsReceptionApiAuthenticationToken">
+    <wsdl:part name="ApiAuthenticationToken" element="tns:ApiAuthenticationToken" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmClearedProductsReceptionSoapIn">
+    <wsdl:part name="parameters" element="tns:ConfirmClearedProductsReception" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmClearedProductsReceptionSoapOut">
+    <wsdl:part name="parameters" element="tns:ConfirmClearedProductsReceptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ConfirmClearedProductsReceptionApiAuthenticationToken">
+    <wsdl:part name="ApiAuthenticationToken" element="tns:ApiAuthenticationToken" />
+  </wsdl:message>
+  <wsdl:message name="EchoSoapIn">
+    <wsdl:part name="parameters" element="tns:Echo" />
+  </wsdl:message>
+  <wsdl:message name="EchoSoapOut">
+    <wsdl:part name="parameters" element="tns:EchoResponse" />
+  </wsdl:message>
+  <wsdl:message name="EchoApiAuthenticationToken">
+    <wsdl:part name="ApiAuthenticationToken" element="tns:ApiAuthenticationToken" />
+  </wsdl:message>
+  <wsdl:portType name="MainInterfaceSoap">
+    <wsdl:operation name="AdviseClearingCenterProduct">
+      <wsdl:input message="tns:AdviseClearingCenterProductSoapIn" />
+      <wsdl:output message="tns:AdviseClearingCenterProductSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedProducts">
+      <wsdl:input message="tns:GetReceivedProductsSoapIn" />
+      <wsdl:output message="tns:GetReceivedProductsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClearedProducts">
+      <wsdl:input message="tns:GetClearedProductsSoapIn" />
+      <wsdl:output message="tns:GetClearedProductsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmReceivedProductsReception">
+      <wsdl:input message="tns:ConfirmReceivedProductsReceptionSoapIn" />
+      <wsdl:output message="tns:ConfirmReceivedProductsReceptionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmClearedProductsReception">
+      <wsdl:input message="tns:ConfirmClearedProductsReceptionSoapIn" />
+      <wsdl:output message="tns:ConfirmClearedProductsReceptionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Echo">
+      <wsdl:input message="tns:EchoSoapIn" />
+      <wsdl:output message="tns:EchoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MainInterfaceSoap" type="tns:MainInterfaceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AdviseClearingCenterProduct">
+      <soap:operation soapAction="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices/AdviseClearingCenterProduct" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:AdviseClearingCenterProductApiAuthenticationToken" part="ApiAuthenticationToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedProducts">
+      <soap:operation soapAction="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices/GetReceivedProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetReceivedProductsApiAuthenticationToken" part="ApiAuthenticationToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClearedProducts">
+      <soap:operation soapAction="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices/GetClearedProducts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetClearedProductsApiAuthenticationToken" part="ApiAuthenticationToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmReceivedProductsReception">
+      <soap:operation soapAction="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices/ConfirmReceivedProductsReception" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ConfirmReceivedProductsReceptionApiAuthenticationToken" part="ApiAuthenticationToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmClearedProductsReception">
+      <soap:operation soapAction="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices/ConfirmClearedProductsReception" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:ConfirmClearedProductsReceptionApiAuthenticationToken" part="ApiAuthenticationToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Echo">
+      <soap:operation soapAction="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices/Echo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:EchoApiAuthenticationToken" part="ApiAuthenticationToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="MainInterfaceSoap12" type="tns:MainInterfaceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="AdviseClearingCenterProduct">
+      <soap12:operation soapAction="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices/AdviseClearingCenterProduct" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:AdviseClearingCenterProductApiAuthenticationToken" part="ApiAuthenticationToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetReceivedProducts">
+      <soap12:operation soapAction="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices/GetReceivedProducts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetReceivedProductsApiAuthenticationToken" part="ApiAuthenticationToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClearedProducts">
+      <soap12:operation soapAction="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices/GetClearedProducts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetClearedProductsApiAuthenticationToken" part="ApiAuthenticationToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmReceivedProductsReception">
+      <soap12:operation soapAction="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices/ConfirmReceivedProductsReception" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ConfirmReceivedProductsReceptionApiAuthenticationToken" part="ApiAuthenticationToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ConfirmClearedProductsReception">
+      <soap12:operation soapAction="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices/ConfirmClearedProductsReception" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:ConfirmClearedProductsReceptionApiAuthenticationToken" part="ApiAuthenticationToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Echo">
+      <soap12:operation soapAction="http://h41201.www4.hp.com/ClearingCenter.Web/WebServices/Echo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:EchoApiAuthenticationToken" part="ApiAuthenticationToken" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MainInterface">
+    <wsdl:port name="MainInterfaceSoap" binding="tns:MainInterfaceSoap">
+      <soap:address location="http://localhost:65130/ClearingCenter.Web/WebServices/MainInterface.asmx" />
+    </wsdl:port>
+    <wsdl:port name="MainInterfaceSoap12" binding="tns:MainInterfaceSoap12">
+      <soap12:address location="http://localhost:65130/ClearingCenter.Web/WebServices/MainInterface.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

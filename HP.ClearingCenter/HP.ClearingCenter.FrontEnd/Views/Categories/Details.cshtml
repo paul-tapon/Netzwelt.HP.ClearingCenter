@@ -1,0 +1,27 @@
+﻿@model HP.ClearingCenter.FrontEnd.Models.Categories.CategoryDetailsViewModel
+@{
+    ViewBag.Title = Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.CategoryDetails_TitleText);
+    ViewBag.CategoryDetailsView = this.Model;    
+}
+
+<article>
+    <header>
+        <h1>@Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.CategoryDetails_TitleText)</h1>
+    </header>
+    <p class="intro">
+        @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.CategoryDetails_IntroText)
+    </p>
+
+    <div>
+        @Html.Partial("_CategoryData", this.Model.Command)
+    </div>
+    @if (!Model.IsAddNew) {
+        <div>
+            @Html.Partial("_CategoryAttributes", this.Model.AddCategoryAttributeCommand)
+        </div>
+    }
+</article>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval.js")
+}

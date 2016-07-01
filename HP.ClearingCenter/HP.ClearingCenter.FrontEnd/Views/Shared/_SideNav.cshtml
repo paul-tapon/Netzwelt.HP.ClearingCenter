@@ -1,0 +1,14 @@
+﻿@model HP.ClearingCenter.FrontEnd.Models.NavigationModel
+
+<!-- BEGIN Sidenav -->
+<section id="sidebar">
+    <nav id="sidenav">
+        <ul class="topics">
+            @foreach (var item in Model.LinkItems) {
+                string itemClass = item.IsActive ? "active" : string.Empty;
+                <li class="@itemClass"><a href="@item.LinkUrl">@item.DisplayText</a></li>                
+            }
+        </ul>
+    </nav>
+</section>
+<!-- END Sidenav -->

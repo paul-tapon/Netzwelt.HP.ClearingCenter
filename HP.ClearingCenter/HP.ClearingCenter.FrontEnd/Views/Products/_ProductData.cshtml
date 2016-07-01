@@ -1,0 +1,74 @@
+﻿@model HP.ClearingCenter.Application.Products.Commands.AddOrUpdateProductCommand
+@{
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+    var manufacturers = (IEnumerable<SelectListItem>)ViewBag.ProductDetailsView.Manufacturers;
+    var allCategories = (IEnumerable<HP.ClearingCenter.Application.Data.Dto.CategoryData>)ViewBag.ProductDetailsView.Categories;
+    var allCountries = (IEnumerable<SelectListItem>)ViewBag.ProductDetailsView.Countries;
+    var allYears = (IEnumerable<SelectListItem>)ViewBag.ProductDetailsView.Years;
+    var allLengths = (IEnumerable<SelectListItem>)ViewBag.ProductDetailsView.LengthUnits;
+    var allWeights = (IEnumerable<SelectListItem>)ViewBag.ProductDetailsView.WeightUnits;
+    string action = ViewBag.ProductDetailsView.IsProductFound ? "Details" : "Add";
+    var categorySelectListBuilder = new HP.ClearingCenter.FrontEnd.Models.Categories.CategorySelectListBuilder(Model.CategoryId, allCategories, addEmptyItem: false);
+}
+
+@using (Html.BeginForm(action, "Products")) 
+{
+    @Html.ValidationSummary()
+
+    <div>
+        @Html.LabelFor(x => x.CategoryId)
+        @categorySelectListBuilder.Build("CategoryId")
+    </div>
+    <div>
+        @Html.LabelFor(x => x.ManufacturerId)
+        @Html.DropDownListFor(x => x.ManufacturerId, manufacturers, new { @class = "medium" })
+    </div>
+    <div>
+        @Html.LabelFor(x => x.ProductNumber)
+        @Html.TextBoxFor(x => x.ProductNumber, new { @class = "medium" })
+    </div>
+    <div>
+        @Html.LabelFor(x => x.ShortName)
+        @Html.TextBoxFor(x => x.ShortName, new { @class = "medium" })
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Description)
+        @Html.TextAreaFor(x => x.Description, new { @class = "medium" })
+    </div>
+    <div>
+        @Html.LabelFor(x => x.OriginCountryIsoCode)
+        @Html.DropDownListFor(x => x.OriginCountryIsoCode, allCountries, new { @class = "medium" })
+    </div>
+    <div>
+        @Html.LabelFor(x => x.YearOfConstruction)
+        @Html.DropDownListFor(x => x.YearOfConstruction, allYears, new { @class = "small" })
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Length)
+        @Html.TextBoxFor(x => x.Length, new { type = "number", step = "0.01", @class="small" })
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Width)
+        @Html.TextBoxFor(x => x.Width, new { type = "number", step = "0.01", @class="small" })
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Height)
+        @Html.TextBoxFor(x => x.Height, new { type = "number", step = "0.01", @class="small" })
+    </div>
+    <div>
+        @Html.LabelFor(x => x.LengthUnit)
+        @Html.DropDownListFor(x => x.LengthUnit, allLengths, new { @class = "medium" })
+    </div>
+    <div>
+        @Html.LabelFor(x => x.Weight)
+        @Html.TextBoxFor(x => x.Weight, new { type = "number", step = "0.01", @class="small" })
+    </div>
+    <div>
+        @Html.LabelFor(x => x.WeightUnit)
+        @Html.DropDownListFor(x => x.WeightUnit, allWeights, new { @class = "medium" })
+    </div>
+    <div class="form-actions">
+        @Html.HiddenFor(x => x.ProductId)
+        @Html.SubmitButton(localTexts, x => x.SaveButton, new { @class = "button inline primary" })
+    </div>
+}

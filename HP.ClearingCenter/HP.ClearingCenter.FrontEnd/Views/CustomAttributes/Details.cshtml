@@ -1,0 +1,24 @@
+﻿@model HP.ClearingCenter.FrontEnd.Models.CustomAttributes.CustomAttributeDetailsViewModel
+@using HP.ClearingCenter.Application
+@{
+    ViewBag.CustomAttributeDetailsView = this.Model;
+    ViewBag.Title = "Details";
+    ViewBag.AvailableDataTypes = this.Model.CustomAttributeTypes;
+}
+
+<article>
+    <header>
+        <h1>@Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.CustomAttributeDetails_TitleText)</h1>
+    </header>
+    <p class="intro">
+        @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.CustomAttributeDetails_IntroText)
+    </p>
+
+    <div>
+        @Html.Partial("_CustomAttributeData", this.Model.Command)
+    </div>
+</article>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval.js")
+}

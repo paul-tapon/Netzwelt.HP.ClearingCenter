@@ -1,0 +1,48 @@
+﻿@using HP.ClearingCenter.Application
+@model HP.ClearingCenter.Application.TransactionTransports.Commands.ClearReceivedProductCommand
+@{
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+    IEnumerable<SelectListItem> statusCodes = (IEnumerable<SelectListItem>)ViewBag.StatusCodes;
+    IEnumerable<SelectListItem> forwardingInstructions = (IEnumerable<SelectListItem>)ViewBag.ForwardingInstructions;
+    bool isClearingLocked = (bool)ViewBag.ClearingView.TransactionTransport.IsClearingLocked;
+}
+
+<div>
+    @using (Html.BeginForm("Clearing", "Transactions", routeValues: new { id = Model.TransportNumber }, method: FormMethod.Post, htmlAttributes: new { id = "clearReceivedProductForm" }))
+    {
+        @Html.ValidationSummary()        
+        
+        <div class="row">
+            @Html.LocalizedLabelFor(x => x.ClearingSelectedProduct)
+            @Html.TextBoxFor(x => x.ClearingSelectedProduct, new { id = "selectedProductSearchText", @class = "medium" })
+            @if (!isClearingLocked) {
+                <a id="changeSelectedProduct" href="javascript:void(0)">@Html.TranslateWithEditor(localTexts, x => x.Clearing_ChangeSelectedProduct)</a>
+                <img class="autocomplete-loader" src="@Url.Content("~/Content/images/i-pre-lg-hpe.gif")" alt="loading..." />    
+                <span id="selectedProductSearchRemarks" class="field-remarks">@Html.TranslateWithEditor(localTexts, x => x.Clearing_SelectedProductRemarks)</span>                
+            }
+        </div>
+        <div class="row">
+            @Html.LocalizedLabelFor(x => x.ClearingRemarks)
+            @Html.TextAreaFor(x => x.ClearingRemarks, new { id = "clearingRemarks", @class="large" })
+        </div>
+        <div class="row">
+            @Html.LocalizedLabelFor(x => x.ForwardingInstructionExternalCode)
+            @Html.DropDownListFor(x => x.ForwardingInstructionExternalCode, forwardingInstructions, new { @class = "medium" })
+        </div>
+        
+        if (!isClearingLocked)
+        {
+            <div>
+                @Html.HiddenFor(x => x.ClearingStatus, htmlAttributes: new { id = "clearingStatus" })
+                @Html.HiddenFor(x => x.TransportNumber, htmlAttributes: new { id = "transportNumber" })
+                @Html.HiddenFor(x => x.ClearingSelectedProduct, htmlAttributes: new { id = "clearingSelectedProduct" })                            
+                @Html.HiddenFor(x => x.SelectedProduct.ProductId, new { id = "productId" })
+                @Html.HiddenFor(x => x.SelectedProduct.Manufacturer, new { id = "manufacturer" })
+                @Html.HiddenFor(x => x.SelectedProduct.ProductName, new { id = "productName" })
+                @Html.HiddenFor(x => x.SelectedProduct.ProductNumber, new { id = "productNumber" })
+
+                <button type="button" id="validateProductButton" class="button inline primary"> @Html.TranslateWithEditor(localTexts, x => x.SubmitButton) </button>
+            </div>
+        }
+    }
+</div>

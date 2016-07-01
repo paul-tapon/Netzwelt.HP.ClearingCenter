@@ -1,0 +1,31 @@
+﻿@model HP.ClearingCenter.Application.Products.Commands.AddOrUpdateCustomAttributeCommand
+@{
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+    IEnumerable<SelectListItem> availableDataTypes = (IEnumerable<SelectListItem>)ViewBag.AvailableDataTypes;
+    string action = ViewBag.CustomAttributeDetailsView.IsAddNew ? "Add" : "Details";
+}
+
+@using (Html.BeginForm(action, "CustomAttributes"))
+{
+    @Html.ValidationSummary()
+    <div>
+        @Html.LocalizedLabelFor(x => x.ExternalCode)
+        @Html.TextBoxFor(x => x.ExternalCode, new { @class = "medium" })
+    </div>
+    <div>
+        @Html.LocalizedLabelFor(x => x.Shortname)
+        @Html.TextBoxFor(x => x.Shortname, new { @class = "medium" })
+    </div>
+    <div>
+        @Html.LocalizedLabelFor(x => x.UnitText)
+        @Html.TextBoxFor(x => x.UnitText, new { @class = "medium" }) 
+    </div>
+    <div>
+        @Html.LocalizedLabelFor(x => x.CustomAttributeTypeId)
+        @Html.DropDownListFor(x => x.CustomAttributeTypeId, availableDataTypes, new { @class = "medium" })
+    </div>
+    <div class="form-actions">
+        @Html.HiddenFor(x => x.CustomAttributeId)
+        @Html.SubmitButton(localTexts, x => x.SubmitButton, new { @class = "button inline primary" })
+    </div>
+}

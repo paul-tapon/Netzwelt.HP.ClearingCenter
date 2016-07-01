@@ -1,0 +1,59 @@
+﻿@model HP.ClearingCenter.FrontEnd.Models.ProductGroups.ProductGroupsSearchViewModel
+@using HP.ClearingCenter.Application
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.Title = Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.ProductGroupsSearch_TitleText);
+}
+
+<article>
+    <header>
+        <h1>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.ProductGroupsSearch_TitleText)</h1>
+    </header>
+    <p class="intro">
+        @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.ProductGroupsSearch_IntroText)
+    </p>
+    @using (Html.BeginForm("Search", "ProductGroups", FormMethod.Get, new { @class = "form-horizontal" }))
+    {
+        <div class="control-group">
+            <label for="term" class="control-label"> @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.ProductGroupsSearch_ExternalCode) </label>
+            <div class="controls">
+                <input type="text" name="term" maxlength="32" class="medium" />
+                @Html.SubmitButton(HP.ClearingCenter.Application.Page.Texts, x => x.SearchButton, new { type="submit", @class = "button inline primary" } )
+            </div>
+        </div>
+    }
+
+    @if (Model.Results != null && Model.Results.Any())
+    {
+        <table>
+            <thead>
+            <tr>
+                <th>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.ProductGroupsSearch_MarketingProgram)</th>
+                <th>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.ProductGroupsSearch_ExternalCode)</th>
+                <th>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.ProductGroupsSearch_ShortName)</th>
+                <th>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.Actions)</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td>@item.MarketingProgramId - @item.CountryIsoCode</td>
+                    <td>@item.ExternalCode</td>
+                    <td>@item.ShortName</td>
+                    <td>
+                        @Html.LocalizedLink(HP.ClearingCenter.Application.Page.Texts, x => x.Actions_Details, "Details", "ProductGroups", new {id = item.Id, externalCode = item.ExternalCode})
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+        
+        if (Model.Results is IPagedList)
+        {
+            @Html.PagedListPager((IPagedList)Model.Results, page => Url.Action("Search", new { page }));
+        }
+    }
+
+</article>

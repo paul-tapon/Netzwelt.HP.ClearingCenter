@@ -1,0 +1,22 @@
+﻿@model HP.ClearingCenter.FrontEnd.Models.Manufacturers.ManufacturerDetailsViewModel
+@using HP.ClearingCenter.Application
+@{
+    ViewBag.Title = Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.ManufacturerDetails_TitleText);
+}
+
+<article>
+    <header>
+        <h1>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.ManufacturerDetails_TitleText)</h1>
+    </header>
+    <p class="intro">
+        @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.ManufacturerDetails_IntroText)
+    </p>
+
+    <div>
+        @Html.Partial("_ManufacturerData", this.Model.Command)
+    </div>
+</article>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryval.js")
+}

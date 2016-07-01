@@ -1,0 +1,35 @@
+﻿@model HP.ClearingCenter.FrontEnd.Models.Transactions.ReceivingViewModel
+@{
+    ViewBag.Title = Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.Receiving_TitleText);
+    ViewBag.StatusCodes = Model.StatusCodes;
+    ViewBag.ValidQuantities = Model.ValidQuantities;
+    ViewBag.ReceivingView = this.Model;
+    bool isReceivingLocked = Model.TransactionTransport.IsReceivingLocked;
+}
+
+@{
+    ViewBag.Title = Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.Receiving_TitleText);
+}
+
+<article>
+    <header><h1>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.Receiving_TitleText)</h1></header>
+    <p class="intro">
+        @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.Receiving_IntroText)
+    </p>
+
+    @Html.Partial("_TransactionDetail", Model.TransactionTransport)
+
+    @Html.Partial("_ReceiveProduct", Model.ReceiveProductCommand)
+</article>
+
+@section scripts {
+    @if (isReceivingLocked) {
+        <script type="text/javascript">
+            (function () {
+                jQuery(document).ready(function () {
+                    jQuery('input[type="text"], textarea, select').attr('disabled', 'disabled');
+                });
+            })();
+        </script>
+    }
+}

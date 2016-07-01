@@ -1,0 +1,59 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP.ClearingCenter.FrontEnd", "HP.ClearingCenter.FrontEnd\HP.ClearingCenter.FrontEnd.csproj", "{03AAF2B1-C25C-4C8F-9BA0-2A73D6C43E88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP.ClearingCenter.Infrastructure", "HP.ClearingCenter.Infrastructure\HP.ClearingCenter.Infrastructure.csproj", "{FBC48D30-9DD5-4138-92F1-0BDD32CAB96B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP.ClearingCenter.Application", "HP.ClearingCenter.Application\HP.ClearingCenter.Application.csproj", "{FC26BD25-A52B-430F-838F-098BE2B59637}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E5D1BDC0-B75D-4A37-BE83-1272DD664C31}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP.ClearingCenter.Tests", "HP.ClearingCenter.Tests\HP.ClearingCenter.Tests.csproj", "{3A7390EA-51CF-4822-A542-AC51435D97C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{3F93AB43-6E2C-471F-8601-CF44221B631E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{CFB3B480-522E-4B05-B39A-B886CE2738F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HP.ClearingCenter.Tools.ProductImport", "HP.ClearingCenter.Tools.ProductImport\HP.ClearingCenter.Tools.ProductImport.csproj", "{490CF5F6-478A-4A0A-8F90-3D5377BA75BE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03AAF2B1-C25C-4C8F-9BA0-2A73D6C43E88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03AAF2B1-C25C-4C8F-9BA0-2A73D6C43E88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03AAF2B1-C25C-4C8F-9BA0-2A73D6C43E88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03AAF2B1-C25C-4C8F-9BA0-2A73D6C43E88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBC48D30-9DD5-4138-92F1-0BDD32CAB96B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBC48D30-9DD5-4138-92F1-0BDD32CAB96B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBC48D30-9DD5-4138-92F1-0BDD32CAB96B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBC48D30-9DD5-4138-92F1-0BDD32CAB96B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC26BD25-A52B-430F-838F-098BE2B59637}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC26BD25-A52B-430F-838F-098BE2B59637}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC26BD25-A52B-430F-838F-098BE2B59637}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC26BD25-A52B-430F-838F-098BE2B59637}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A7390EA-51CF-4822-A542-AC51435D97C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A7390EA-51CF-4822-A542-AC51435D97C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A7390EA-51CF-4822-A542-AC51435D97C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A7390EA-51CF-4822-A542-AC51435D97C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{490CF5F6-478A-4A0A-8F90-3D5377BA75BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{490CF5F6-478A-4A0A-8F90-3D5377BA75BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{490CF5F6-478A-4A0A-8F90-3D5377BA75BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{490CF5F6-478A-4A0A-8F90-3D5377BA75BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3A7390EA-51CF-4822-A542-AC51435D97C1} = {3F93AB43-6E2C-471F-8601-CF44221B631E}
+		{490CF5F6-478A-4A0A-8F90-3D5377BA75BE} = {CFB3B480-522E-4B05-B39A-B886CE2738F2}
+	EndGlobalSection
+EndGlobal

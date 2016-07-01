@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>HP Clearing Center - @ViewBag.Title</title>
+        <meta http-equiv="x-ua-compatible" content="IE=edge">
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="utf-8" />
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+                
+        @Styles.Render("~/Content/jqueryui/themes.css")
+        @Styles.Render("~/Content/styles.css")
+        
+        <!-- Page specific styles -->        
+        @RenderSection("styles", required: false)
+
+        @Scripts.Render("~/bundles/jquery.js")                
+        @Scripts.Render("~/bundles/modernizr.js")
+
+        @{Html.EnableUnobtrusiveJavaScript();}
+    </head>
+    <body>
+        <div id="page-wrapper">
+            <!-- BEGIN Header -->
+            <div id="page-header">
+			    <div id="logo">
+                    <a href="http://www.hp.com/" title="Visit hp.com" style="background: transparent url(@Url.Content("~/Content/images/hp-logo.gif")) no-repeat top right !important;">Visit hp.com</a>
+                    <img src="@Url.Content("~/Content/images/hp-logo-print.png")" alt="Visit hp.com">
+			    </div>
+
+			    <div id="site-title">
+				    @Html.LocalizedLink(HP.ClearingCenter.Application.Page.Texts, x => x.ApplicationTitle, "Index", "Home", null, new { accesskey="1", title = "Clearing Center" })
+			    </div> <!-- End #site-title -->
+
+			    <div id="header-utility">
+				    <div id="utility-links">
+					    <nav>
+						    <ul class="inline-list">							    
+							    <li><a href="@Url.Action("SignOut", "Secure")">@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.Logout)</a>·&nbsp;&nbsp;</li>							    
+						    </ul>
+					    </nav>
+				    </div>
+			    </div>  <!-- End #header-utility --> 
+                
+                @Html.Partial("_TopNav")
+		    </div>
+            <!-- END Header -->
+
+            <!-- BEGIN page content -->
+            <div id="page-content">
+                @*@Html.Partial("_SideNav", new HP.ClearingCenter.FrontEnd.Models.SideNavigationModelFactory(this).CreateInstance())*@
+                <!-- BEGIN content -->
+                <section id="content">
+                    @RenderBody()
+                </section>
+                <!-- END content -->
+              </div>
+            <!-- END page content -->
+
+            <!-- BEGIN footer -->
+            <footer id="page-footer">
+    
+		        <!-- BEGIN Footer Nav -->
+		        <ul>
+			
+			        <li><a href="@Url.Action("SignOut", "Secure")">@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.Logout)</a></li>
+			        <li>|</li>
+			        <li><a href="http://www8.hp.com/us/en/privacy/privacy.html">@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.PrivacyStatement)</a></li>
+			        <li><a href="http://www8.hp.com/us/en/privacy/terms-of-use.html">@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.TermsOfUse)</a></li>
+			        <li><a href="http://www.hp.com/">hp.com</a></li>
+		        </ul>
+		        <!-- END Footer Nav -->
+		        <p id="copyright">©  2016 Hewlett-Packard Development Company, LP.</p>
+            </footer>
+            <!-- END footer -->
+
+        </div>
+
+        <div>
+            <ul>
+            @foreach (var txt in Html.DebugHelperTexts())
+            {
+                <li>@txt</li>
+            }
+            </ul>
+        </div>
+
+        <script type="text/javascript" src="@Url.Content("~/Scripts/hpexperience.utils.js")"></script>
+        
+        <!-- page specific scripts -->
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

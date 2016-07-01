@@ -1,0 +1,57 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model HP.ClearingCenter.FrontEnd.Models.CustomAttributes.CustomAttributesSearchViewModel
+@{
+    ViewBag.Title = Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.CustomAttributesSearch_TitleText); 
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+}
+
+<article>
+    <header>
+        <h1>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.CustomAttributesSearch_TitleText)</h1>
+    </header>
+    <p class="intro">
+        @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.CustomAttributesSearch_TitleText)
+    </p>
+    @using (Html.BeginForm("Search", "CustomAttributes", FormMethod.Get, new { @class="form-horizontal"})) 
+    {
+        <div class="control-group">
+            <label for="term" class="control-label"> @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.CustomAttributesSearch_ShortCode) </label>
+            <div class="controls">
+                <input type="text" name="term" maxlength="32" class="medium" />
+                @Html.SubmitButton(HP.ClearingCenter.Application.Page.Texts, x => x.SearchButton, new { type="submit", @class = "button inline primary" } )
+            </div>
+        </div>
+    }
+    @if (Model.Results != null && Model.Results.Any())
+    {
+        <table>
+            <thead>
+            <tr>
+                <th>@Html.TranslateWithEditor(localTexts, x => x.CustomAttributesSearch_ShortCode)</th>
+                <th>@Html.TranslateWithEditor(localTexts, x => x.CustomAttributesSearch_ShortName)</th>
+                <th>@Html.TranslateWithEditor(localTexts, x => x.CustomAttributesSearch_DataType)</th>
+                <th>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.Actions)</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model.Results)
+            {
+                <tr>
+                    <td>@item.ExternalCode</td>
+                    <td>@item.ShortName</td>
+                    <td>@item.CustomAttributeType.ToString()</td>
+                    <td>@Html.ActionLink("Details", "Details", new {controller = "CustomAttributes", id = item.Id})</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+       
+        if (Model.Results is IPagedList)
+        {
+            @Html.PagedListPager((IPagedList) Model.Results, page => Url.Action("Search", new {page}));
+        }
+        
+    }
+
+</article>

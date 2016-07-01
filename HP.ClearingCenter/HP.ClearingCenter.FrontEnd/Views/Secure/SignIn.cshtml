@@ -1,0 +1,37 @@
+﻿@model HP.ClearingCenter.Application.Security.Commands.SignInCommand
+@{
+    ViewBag.Title = Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.SignIn_TitleText);
+    
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+}
+
+<article>
+    <header>
+        <h1>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.SignIn_TitleText)</h1>
+    </header>
+    <p class="intro">
+        @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.SignIn_IntroText)
+    </p>
+
+    @using (Html.BeginForm("SignIn", "Secure", FormMethod.Post))
+    {
+        @Html.ValidationSummary()
+        
+        <div class="row">
+            @Html.LocalizedLabelFor(x => x.Username)
+            @Html.TextBoxFor(x => x.Username)
+        </div>
+        <div class="row">
+            @Html.LocalizedLabelFor(x => x.Password)
+            @Html.PasswordFor(x => x.Password)
+        </div>
+        
+        @Html.SubmitButton(localTexts, x => x.SignIn_Button, new { @class = "btn-critical" })
+    }
+
+</article>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryui.js")
+    @Scripts.Render("~/bundles/jqueryval.js")
+}

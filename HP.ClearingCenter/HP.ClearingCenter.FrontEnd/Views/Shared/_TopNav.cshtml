@@ -1,0 +1,71 @@
+﻿@{
+    var appContext = DependencyResolver.Current.GetService<HP.ClearingCenter.Infrastructure.Contracts.IApplicationContext>();
+    var nav = new HP.ClearingCenter.FrontEnd.Models.TopNavViewModel(appContext);
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+}
+
+<!-- BEGIN top nav -->
+<div id="top-nav-new">
+    @if (this.User.Identity.IsAuthenticated) {
+        if (nav.IsReceivingEnabled || nav.IsClearingEnabled) {        
+            <nav id="ccprocesses" class="">
+		        <header> 
+                    <a href="@Url.Action("Index", "Transactions")">
+			            <h2>@Html.TranslateWithEditor(localTexts, x => x.Menu_Transactions)</h2>
+			            <p>@Html.TranslateWithEditor(localTexts, x => x.Menu_TransactionsSubtitle)</p>
+			        </a> 
+		        </header>
+	        </nav>
+        }
+        
+        if (nav.IsProductManagementEnabled) {
+            <nav id="productdb" class="list">
+		        <header> 
+                    <a href="#none">
+			        <h2>@Html.TranslateWithEditor(localTexts, x => x.Menu_ProductDatabase)</h2>
+			        <p>@Html.TranslateWithEditor(localTexts, x => x.Menu_ProductDatabaseSubtitle)</p>
+			        </a> 
+		        </header>
+                
+		        <div class="flyout-menu hide">
+			        <div class="flyout-box">
+				        <ul class="topics">
+                            <li><a href="#">@Html.TranslateWithEditor(localTexts, x => x.Menu_Add)</a></li>
+                            <ul class="subtopics">
+                                <li><a href="@Url.Action("Add", "Categories")">@Html.TranslateWithEditor(localTexts, x => x.Menu_Categories)</a></li>
+                                <li><a href="@Url.Action("Add", "CustomAttributes")">@Html.TranslateWithEditor(localTexts, x => x.Menu_CustomAttributes)</a></li>
+                                <li><a href="@Url.Action("Add", "Manufacturers")">@Html.TranslateWithEditor(localTexts, x => x.Menu_Manufacturers)</a></li>
+                                <li><a href="@Url.Action("Add", "Products")">@Html.TranslateWithEditor(localTexts, x => x.Menu_Products)</a></li>
+                            </ul>
+                            <li><a href="#">@Html.TranslateWithEditor(localTexts, x => x.Menu_Manage)</a></li>
+                            <ul class="subtopics">                                
+				                <li><a href="@Url.Action("Index", "Categories")">@Html.TranslateWithEditor(localTexts, x => x.Menu_Categories)</a></li>
+                                <li><a href="@Url.Action("Index", "CustomAttributes")">@Html.TranslateWithEditor(localTexts, x => x.Menu_CustomAttributes)</a></li>
+                                <li><a href="@Url.Action("Index", "Manufacturers")">@Html.TranslateWithEditor(localTexts, x => x.Menu_Manufacturers)</a></li>
+                                <li><a href="@Url.Action("Index", "Products")">@Html.TranslateWithEditor(localTexts, x => x.Menu_Products)</a></li>
+                            </ul>
+				        </ul>
+			        </div>
+		        </div>
+	        </nav>
+            <nav id="productgroup" class="list">
+		        <header> 
+                    <a href="@Url.Action("Index", "ProductGroups")">
+			        <h2>@Html.TranslateWithEditor(localTexts, x => x.Menu_ProductGroups)</h2>
+			        <p>@Html.TranslateWithEditor(localTexts, x => x.Menu_ProductGroupsSubtitle)</p>
+			        </a> 
+		        </header>
+		        <div class="flyout-menu hide">
+			        <div class="flyout-box">
+				        <ul class="topics">
+                            <li><a href="@Url.Action("Add", "ProductGroups")">@Html.TranslateWithEditor(localTexts, x => x.Menu_Add)</a></li>
+                            <li><a href="@Url.Action("Index", "ProductGroups")">@Html.TranslateWithEditor(localTexts, x => x.Menu_Manage)</a></li>
+				        </ul>
+			        </div>
+		        </div>
+	        </nav>                
+        }
+    }
+    
+</div>
+<!-- END top nav -->

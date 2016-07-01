@@ -1,0 +1,58 @@
+﻿@model HP.ClearingCenter.FrontEnd.Models.ProductGroups.ProductGroupDetailsViewModel
+@using HP.ClearingCenter.Application
+@{  
+    ViewBag.Title = Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.ProductGroupDetails_TitleText);
+    ViewBag.IsAddingNewGroup = this.Model.IsAddingNewGroup;
+    ViewBag.ProductGroupId = this.Model.ProductGroupId;
+    ViewBag.Categories = this.Model.Categories;
+    ViewBag.ProductGroupId = this.Model.ProductGroupId;
+    ViewBag.ProductGroupExternalCode = this.Model.AddProductGroupCommand != null ? this.Model.AddProductGroupCommand.ExternalCode : string.Empty;
+}
+
+@section styles {
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/styles/fg.menu.css")" />
+}
+
+<article>
+    <header>
+        <h1>@Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.ProductGroupDetails_TitleText)</h1>
+    </header>
+    <p class="intro">
+        @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.ProductGroupDetails_IntroText)
+    </p>
+
+    <div>
+        <h2>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.ProductGroupDetails_BasicData)</h2>
+        <div>
+            @Html.Partial("_ProductGroupData", this.Model.AddProductGroupCommand)
+        </div>
+    </div>
+
+    @if (!this.Model.IsAddingNewGroup) {
+        <div>
+            <h2>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.ProductGroupDetails_CategoryFilters)</h2>
+            <div>
+                @Html.Partial("_CategoryFilters", this.Model)
+            </div>
+        </div>
+    }
+
+</article>
+
+@section scripts {
+    @Scripts.Render("~/bundles/jqueryui.js")
+    @Scripts.Render("~/bundles/jqueryval.js")
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Application/Controls/fg.menu.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Application/Views/ProductGroupDetailsView.js")"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            var view = new ProductGroupDetailsView({
+                getAttributeDetailsUrl: '@Url.Action("DetailsJson", new { controller = "CustomAttributes" })',
+                addCategoryAttributeFilterUrl: '@Url.Action("AddCategoryAttributeFilter", "ProductGroups")',
+                removeCategoryUrl: '@Url.Action("RemoveCategory", "ProductGroups")'
+            });
+
+            view.show();
+        });
+    </script>
+}

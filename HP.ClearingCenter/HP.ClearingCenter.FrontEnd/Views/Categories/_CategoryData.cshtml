@@ -1,0 +1,28 @@
+﻿@model HP.ClearingCenter.Application.Products.Commands.AddOrUpdateCategoryCommand
+@{
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+    string action = ViewBag.CategoryDetailsView.IsAddNew ? "Add" : "Details";
+    var allCategories = (IEnumerable<HP.ClearingCenter.Application.Data.Dto.CategoryData>)ViewBag.CategoryDetailsView.AllCategories;
+    var categoryListBuilder = new HP.ClearingCenter.FrontEnd.Models.Categories.CategorySelectListBuilder(Model.ParentCategoryId, allCategories);
+}
+
+@using (Html.BeginForm(action, "Categories"))
+{
+    @Html.ValidationSummary()
+    <div>
+        @Html.LocalizedLabelFor(x => x.ExternalCode)
+        @Html.TextBoxFor(x => x.ExternalCode, new { @class = "medium" })
+    </div>
+    <div>
+        @Html.LocalizedLabelFor(x => x.ShortName)
+        @Html.TextBoxFor(x => x.ShortName, new { @class = "medium" })
+    </div>
+    <div>
+        @Html.LocalizedLabelFor(x => x.ParentCategoryId)
+        @categoryListBuilder.Build("ParentCategoryId")
+    </div>
+    <div class="form-actions">
+        @Html.HiddenFor(x => x.CategoryId)
+        @Html.SubmitButton(localTexts, x => x.SaveButton, new { @class = "button inline primary" })
+    </div>
+}

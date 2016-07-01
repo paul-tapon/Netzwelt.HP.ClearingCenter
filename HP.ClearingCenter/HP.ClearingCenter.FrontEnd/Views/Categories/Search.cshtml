@@ -1,0 +1,58 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model HP.ClearingCenter.FrontEnd.Models.Categories.CategoriesSearchViewModel
+@{
+    ViewBag.Title = Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.CategoriesSearch_TitleText);
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+}
+
+<article>
+    <header>
+        <h1>@Html.TranslateWithEditor(localTexts, x => x.CategoriesSearch_TitleText)</h1>
+    </header>
+    <p class="intro">
+        @Html.TranslateWithEditor(localTexts, x => x.CategoriesSearch_IntroText)
+    </p>
+
+    @using (Html.BeginForm("Search", "Categories", FormMethod.Get, new { @class = "form-horizontal" }))
+    {
+        <div class="control-group">
+            <label for="term" class="control-label"> @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.CategoriesSearch_CategoryShortCode) </label>
+            <div class="controls">
+                <input type="text" name="term" maxlength="32" class="medium" />
+                @Html.SubmitButton(localTexts, x => x.SearchButton, new { type = "submit", @class = "button inline primary" })
+            </div>
+        </div>
+    }
+    @if (Model.Results != null && Model.Results.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>@Html.TranslateWithEditor(localTexts, x => x.CategoriesSearch_ShortName)</th>
+                    <th>@Html.TranslateWithEditor(localTexts, x => x.CategoriesSearch_ParentCategory)</th>
+                    <th>@Html.TranslateWithEditor(localTexts, x => x.Actions)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Results)
+            {
+                    <tr>
+                        <td>@item.ShortName</td>
+                        <td>@item.NavigationPath</td>
+                        <td>
+                            @Html.LocalizedLink(localTexts, x => x.Actions_Details, "Details", "Categories", new {id = item.Id})
+                        </td>
+                    </tr>
+            }
+            </tbody>
+        </table>
+
+        if (Model.Results is IPagedList)
+        {
+            @Html.PagedListPager((IPagedList) Model.Results, page => Url.Action("Search", new {page}));
+        }
+
+    }
+
+</article>

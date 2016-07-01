@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Debug";
+    var app = Html.GetAppContext();
+    var debugProvider = app.DebugSettingsProvider;
+}
+
+<h2>Debug</h2>
+<div>
+    @using (Html.BeginForm("Debug", "Pages", FormMethod.Post))
+    {
+        <div class="row">
+            <label for="shortcutEditMode">Shortcut Edit Mode?</label>
+            @Html.CheckBox("isShortcutEditMode", debugProvider.GetCurrentSettings().IsShortcutEditModeEnabled)
+        </div>
+        <div class="row">
+            <label for="translatorCachingEnabled">Translator Caching Enabled?</label>
+            @Html.CheckBox("isTranslatorCachingEnabled", debugProvider.GetCurrentSettings().IsTranslatorCachingEnabled)
+        </div>
+        <div class="row">
+            <button type="submit">Submit</button>
+        </div>
+    }
+</div>

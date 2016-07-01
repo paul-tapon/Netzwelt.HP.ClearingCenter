@@ -1,0 +1,28 @@
+﻿@model HP.ClearingCenter.Application.Products.Commands.SubmitProductAttributesCommand
+@{
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+    var categoryAttributes = (HP.ClearingCenter.Application.Data.Dto.CustomAttributeData[])ViewBag.ProductDetailsView.CategoryAttributes;
+    var attributeValues = (IDictionary<string, HP.ClearingCenter.Application.Data.Dto.ProductCustomAttributeValueData>)ViewBag.ProductDetailsView.CustomAttributeValues;
+}
+
+<h2>Attributes</h2>
+
+@using (Html.BeginForm("CustomAttributes", "Products"))
+{
+    @Html.ValidationSummary()
+    
+    for (int idx = 0; idx < categoryAttributes.Length; idx++)
+    {
+        var valueViewModel = new HP.ClearingCenter.FrontEnd.Models.CustomAttributes.CustomAttributeValueViewModel(categoryAttributes[idx], idx, attributeValues);
+        <div>
+            @valueViewModel.BuildLabel()
+            @valueViewModel.BuildValueInput()
+            @valueViewModel.BuildExternalCodeInput()
+        </div>
+    }
+    
+    <div class="form-actions">
+        @Html.HiddenFor(x => x.ProductId)
+        @Html.SubmitButton(localTexts, x => x.ProductDetails_SaveAttributes, new { @class = "button inline primary" })
+    </div>
+}

@@ -1,0 +1,67 @@
+﻿@model HP.ClearingCenter.Application.Data.Dto.CategoryData
+@{
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+    var availableAttributes = new List<SelectListItem>();
+    availableAttributes.Add(new SelectListItem());
+    availableAttributes.AddRange(Model.AvailableFilters.Select(x => new SelectListItem
+    {
+        Text = x.ShortName,
+        Value = x.Id.ToString()
+    }));
+}
+
+<div>
+    <div>
+        <h2 style="display:inline; padding-right:10px;">@this.Model.ShortName</h2>
+        <a class="removeCategoryLink" href="javascript:void(0)" data-productgroupcategory-id="@Model.ProductGroupCategoryId" data-category-id="@Model.Id" data-productgroup-id="@ViewBag.ProductGroupId">Remove</a>
+    </div>
+    <table width="720px">
+        <tbody>
+            @foreach (var item in Model.Filters)
+            {
+                <tr>
+                    <td class="attribute">@item.AttributeShortName</td>
+                    <td class="operator">@item.OperatorShortName</td>
+                    <td class="values">
+                        @if (item.FilterOperator == HP.ClearingCenter.Application.ProductGroups.Entities.FilterOperator.Between) {
+                            @item.Values[0] 
+                            if (item.Values.Length > 1) {
+                                <span>and</span> @item.Values[1]
+                            }
+                        } else {
+                            @item.ValuesCsv   
+                        }
+                    </td>
+                    <td class="actions">
+                        @using (Html.BeginForm("RemoveCategoryAttributeFilter", "ProductGroups")) {
+                            @Html.Hidden("ProductGroupId", (int)ViewBag.ProductGroupId)
+                            @Html.Hidden("ProductGroupExternalCode", (string)ViewBag.ProductGroupExternalCode)
+                            @Html.Hidden("ProductFilterId", item.ProductFilterId)
+                            @Html.SubmitButton(HP.ClearingCenter.Application.Page.Texts, x => x.ProductGroupDetails_RemoveAttributeFilter, new { @class = "button slim inline secondary"})
+                        }
+                    </td>
+                </tr>
+            }
+            @if (Model.AvailableFilters.Any()) {
+                string selectedAttributeId = "selectedAttribute_" + Model.Id;
+                string filterAttributeOperatorId = "filterAttributeOperator_" + Model.Id;
+                string filterAttributeValuesId = "filterAttributeValues_" + Model.Id;
+                <tr class="addFilterAttributeForm">
+                    <td class="attribute">                        
+                        @Html.DropDownList("CustomAttributeId", availableAttributes, new { id = selectedAttributeId, @class = "attributeSelector", categoryId = Model.Id, @operator = filterAttributeOperatorId }) 
+                    </td>
+                    <td class="operator">@Html.DropDownList("FilterOperatorId", Enumerable.Empty<SelectListItem>(), new { id = filterAttributeOperatorId, style = "display:none;", @class = "operatorSelector" })</td>
+                    <td class="values" id="@filterAttributeValuesId">
+                    </td>
+                    <td class="actions">
+                        @Html.Hidden("ProductGroupCategoryId", Model.ProductGroupCategoryId)
+                        @Html.Hidden("ProductGroupId", (int)ViewBag.ProductGroupId)
+                        @Html.Hidden("ProductGroupExternalCode", (string)ViewBag.ProductGroupExternalCode)
+                        @Html.Hidden("CategoryId", Model.Id)
+                        <button type="submit" class="button slim inline secondary" style="display:none;">@Html.TranslateWithEditor(localTexts, x => x.ProductGroupDetails_AddFilter)</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

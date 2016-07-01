@@ -1,0 +1,27 @@
+﻿@model HP.ClearingCenter.Application.Products.Commands.AddOrUpdateManufacturerCommand
+@{
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+}
+
+@using (Html.BeginForm("Details", "Manufacturers"))
+{
+    @Html.ValidationSummary()
+
+    <div>
+        @Html.LocalizedLabelFor(x => x.ExternalCode)
+        @Html.TextBoxFor(x => x.ExternalCode)
+    </div>
+    <div>
+        @Html.LocalizedLabelFor(x => x.Shortname)
+        @Html.TextBoxFor(x => x.Shortname)
+    </div>
+    <div>
+        @Html.LocalizedLabelFor(x => x.Description)
+        @Html.TextBoxFor(x => x.Description)
+    </div>
+    <div class="form-actions">
+        @Html.HiddenFor(x => x.ManufacturerId)
+        @Html.SubmitButton(localTexts, x => x.SaveButton, new { @class = "button inline primary" })
+    </div>
+    
+}

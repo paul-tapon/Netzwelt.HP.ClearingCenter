@@ -1,0 +1,48 @@
+﻿@model HP.ClearingCenter.Application.ProductGroups.Commands.AddProductGroupCommand
+@{
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+    string action = Model.ProductGroupId.HasValue ? "Edit" : "Add";
+}
+<div>
+    @using (Html.BeginForm(action, "ProductGroups", FormMethod.Post))
+    {
+        @Html.ValidationSummary()
+
+        <div>
+            @Html.LocalizedLabelFor(x => x.MarketingProgramId)
+            @Html.TextBoxFor(x => x.MarketingProgramId)
+        </div>
+        <div>
+            @Html.LocalizedLabelFor(x => x.CountryIsoCode)
+            @Html.TextBoxFor(x => x.CountryIsoCode)
+        </div>
+        <div>
+            @Html.LocalizedLabelFor(x => x.ExternalCode)
+            @Html.TextBoxFor(x => x.ExternalCode)
+        </div>
+        <div>
+            @Html.LocalizedLabelFor(x => x.ShortName)
+            @Html.TextBoxFor(x => x.ShortName)
+        </div>
+        <div>
+            @Html.LocalizedLabelFor(x => x.Description)
+            @Html.TextAreaFor(x => x.Description)
+        </div>
+        
+        if (!ViewBag.IsAddingNewGroup) {
+            
+            <div>
+                @Html.LocalizedLabelFor(x => x.IsActive)
+                @Html.CheckBoxFor(x => x.IsActive)
+            </div>
+            
+            <div>
+                @Html.HiddenFor(x => x.ProductGroupId)
+            </div>
+        }
+        
+        <div class="form-actions">
+            @Html.SubmitButton(localTexts, x => x.SaveButton, new { @class="button inline primary" })
+        </div>
+    }
+</div>

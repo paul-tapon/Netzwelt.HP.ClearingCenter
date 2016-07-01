@@ -1,0 +1,32 @@
+﻿@model HP.ClearingCenter.Application.Localization.Commands.AddOrUpdateTranslationCommand
+@{
+    ViewBag.Title = "Localize Text";
+}
+
+<h2> Localize Text </h2>
+<div>
+    @using (Html.BeginForm("LocalizeText", "Pages", FormMethod.Post))
+    {
+        <div class="row">
+            @Html.Label("CountryIsoCode", "Country ISO Code")
+            @Html.TextBoxFor(x => x.CountryIsoCode, new { @readonly="readonly" })
+        </div>
+        <div class="row">
+            @Html.Label("LanguageIsoCode", "Language ISO Code")
+            @Html.TextBoxFor(x => x.LanguageIsoCode, new { @readonly="readonly"})
+        </div>
+        <div class="row">
+            @Html.Label("ResourceKey", "Shortcut")
+            @Html.TextBoxFor(x => x.ResourceKey, new { @readonly="readonly"})
+        </div>
+        <div class="row">
+            @Html.Label("TextFormat", "Local Text")
+            @Html.TextAreaFor(x => x.TextFormat)
+        </div>
+        <div class="row">
+            <input type="submit" value="Submit" />
+            @Html.ActionLink("Debug Settings", "Debug", "Pages")
+        </div>
+    }
+</div>
+

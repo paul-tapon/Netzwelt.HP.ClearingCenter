@@ -1,0 +1,56 @@
+﻿@model HP.ClearingCenter.Application.Products.Commands.AddCategoryAttributeCommand
+@{
+    var assignedAttributes = (IEnumerable<HP.ClearingCenter.Application.Data.Dto.CustomAttributeData>)ViewBag.CategoryDetailsView.AssignedAttributes;
+    var availableAttributes = (IEnumerable<SelectListItem>)ViewBag.CategoryDetailsView.AvailableAttributes;
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+}
+
+<h2>@Html.TranslateWithEditor(localTexts, x => x.CategoryDetails_CategoryAttributes)</h2>
+
+@if (assignedAttributes != null && assignedAttributes.Any()) {
+    <table>
+        <thead>
+            <tr>
+                <th>@Html.TranslateWithEditor(localTexts, x => x.CategoryDetails_ExternalCode)</th>
+                <th>@Html.TranslateWithEditor(localTexts, x => x.CategoryDetails_ShortName)</th>
+                <th>@Html.TranslateWithEditor(localTexts, x => x.CategoryDetails_DataType)</th>
+                <th>@Html.TranslateWithEditor(localTexts, x => x.CategoryDetails_IsInherited)</th>
+                <th>@Html.TranslateWithEditor(localTexts, x => x.Actions)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var attr in assignedAttributes)
+            {
+                <tr>
+                    <td>@attr.ExternalCode</td>
+                    <td>@attr.ShortName</td>
+                    <td>@attr.CustomAttributeType.ToString()</td>
+                    <td>@attr.IsInherited</td>
+                    <td>
+                        @if (!attr.IsInherited.GetValueOrDefault()) {
+                            using (Html.BeginForm("RemoveAttribute", "Categories", FormMethod.Post))
+                            {
+                                @Html.HiddenFor(x => x.CategoryId)
+                                @Html.Hidden("CustomAttributeExternalCode", attr.ExternalCode)
+                                @Html.SubmitButton(localTexts, x => x.RemoveButton, new { @class = "button slim inline secondary" })
+                            }                            
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@if (availableAttributes != null && availableAttributes.Any())
+{
+    using (Html.BeginForm("AddAttribute", "Categories", FormMethod.Post))
+    {
+        <div>
+            @Html.LabelFor(x => x.CustomAttributeExternalCode)
+            @Html.DropDownListFor(x => x.CustomAttributeExternalCode, availableAttributes, new { @class="medium"})
+            @Html.HiddenFor(x => x.CategoryId)
+            @Html.SubmitButton(localTexts, x => x.CategoryDetails_AddCustomAttributeButton, new { @class = "button slim inline secondary" })
+        </div>        
+    }
+}

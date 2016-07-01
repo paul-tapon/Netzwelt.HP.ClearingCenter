@@ -1,0 +1,35 @@
+﻿@using HP.ClearingCenter.Application
+@model HP.ClearingCenter.Application.TransactionTransports.Commands.ReceiveProductCommand
+@{
+    IEnumerable<SelectListItem> statusCodes = (IEnumerable<SelectListItem>)ViewBag.StatusCodes;
+    IEnumerable<SelectListItem> validQuantities = (IEnumerable<SelectListItem>)ViewBag.ValidQuantities;
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+    bool isReceivingLocked = (bool)ViewBag.ReceivingView.TransactionTransport.IsReceivingLocked;
+}
+<div>
+     @using (Html.BeginForm("Receiving", "Transactions", FormMethod.Post))
+     {
+        @Html.ValidationSummary()
+         
+        <div>
+            @Html.LocalizedLabelFor(x => x.UnitsReceived)
+            @Html.DropDownListFor(x => x.UnitsReceived, validQuantities, new { @class = "medium" })
+        </div>
+        <div>
+            @Html.LocalizedLabelFor(x => x.StatusCode)
+            @Html.DropDownListFor(x => x.StatusCode, statusCodes, new { @class = "medium" })
+        </div>
+        <div>
+            @Html.LocalizedLabelFor(x => x.Remarks)
+            @Html.TextAreaFor(x => x.Remarks, new { @class = "large" })
+        </div>
+         
+         if (!isReceivingLocked) {
+             <div class="form-actions">
+                 @Html.HiddenFor(x => x.TransportNumber)
+                 @Html.SubmitButton(localTexts, x => x.SubmitButton, new { @class="button inline primary" })
+             </div>
+         }
+     }
+
+</div>

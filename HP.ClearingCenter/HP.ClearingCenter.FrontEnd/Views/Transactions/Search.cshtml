@@ -1,0 +1,58 @@
+﻿@using HP.ClearingCenter.Application
+@model HP.ClearingCenter.FrontEnd.Models.Transactions.TransactionsSearchViewModel
+@{
+    ViewBag.Title = Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.TransactionSearch_TitleText);
+}
+
+<article>
+    <header>
+        <h1>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.TransactionSearch_TitleText)</h1>
+    </header>
+    <p class="intro">
+        @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.TransactionSearch_IntroText)
+    </p>
+    @using (Html.BeginForm("Search", "Transactions", FormMethod.Get, new { @class="form-horizontal"}))
+    {
+        <div class="control-group">
+            <label for="id" class="control-label"> @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.TransactionSearch_TransportOrQuoteNumber) </label>
+            <div class="controls">
+                <input type="text" name="id" maxlength="32" class="medium" />
+                @Html.SubmitButton(HP.ClearingCenter.Application.Page.Texts, x => x.SearchButton, new { type="submit", @class = "button inline primary" } )
+            </div>
+        </div>        
+    }
+
+    @if (this.Model.TransactionTransports != null && this.Model.TransactionTransports.Any())
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>@Html.TranslateWithEditor(Text.Common, x => x.QuoteNumber)</th>
+                    <th>@Html.TranslateWithEditor(Text.Common, x => x.TransportNumber)</th>
+                    <th>@Html.TranslateWithEditor(Text.Common, x => x.ProductName)</th>
+                    <th>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.Actions)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.TransactionTransports)
+                {
+                    <tr>
+                        <td>@item.QuoteNumber</td>
+                        <td>@item.TransportNumber</td>
+                        <td>@item.ProductAdvised.Manufacturer @item.ProductAdvised.ProductName (@item.ProductAdvised.ProductNumber)</td>
+                        <td>
+                            @Html.LocalizedLink(HP.ClearingCenter.Application.Page.Texts, x => x.TransactionSearch_ReceivingDetails, "Receiving", "Transactions", new { id = item.TransportNumber })
+                            
+                            @if (item.IsClearingEnabled)
+                            {
+                                @Html.LocalizedLink(HP.ClearingCenter.Application.Page.Texts, x => x.TransactionSearch_ClearingDetails, "Clearing", "Transactions", new { id = item.TransportNumber })
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+</article>
+

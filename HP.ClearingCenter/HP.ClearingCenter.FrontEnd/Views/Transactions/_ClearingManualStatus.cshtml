@@ -1,0 +1,29 @@
+﻿@using HP.ClearingCenter.Application
+@model HP.ClearingCenter.Application.TransactionTransports.Commands.ClearReceivedProductCommand
+@{
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+    IEnumerable<SelectListItem> statusCodes = (IEnumerable<SelectListItem>)ViewBag.StatusCodes;
+    IEnumerable<SelectListItem> forwardingInstructions = (IEnumerable<SelectListItem>)ViewBag.ForwardingInstructions;
+}
+
+<div id="dialog-form" title="@Html.Translate(HP.ClearingCenter.Application.Page.Texts, x => x.Clearing_TitleText)">
+    <p>
+        @Html.TranslateWithEditor(HP.ClearingCenter.Application.Page.Texts, x => x.Clearing_ManualStatusOverrideText)
+    </p>
+    <form>
+        <div class="row">
+            @Html.LocalizedLabelFor(x => x.ClearingStatus)
+            @Html.DropDownListFor(x => x.ClearingStatus, statusCodes, new { id = "clearingStatusDropdown", @class = "large" })
+        </div>
+        <div class="row">
+            @Html.LocalizedLabelFor(x => x.ClearingRemarks)
+            @Html.TextAreaFor(x => x.ClearingRemarks, new { id = "clearingRemarksManual", @class = "large" })
+        </div>
+        <div class="row" style="margin-top:40px;">
+            <div class="right">
+                <button type="button" id="submitManualClearingStatusButton" class="button inline critical"> @Html.TranslateWithEditor(localTexts, x => x.SubmitButton) </button>
+                <button type="button" id="cancelManualClearingStatusButton" class="button inline secondary"> @Html.TranslateWithEditor(localTexts, x => x.CancelButton) </button>
+            </div>
+        </div>
+    </form>
+</div>

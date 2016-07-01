@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FC26BD25-A52B-430F-838F-098BE2B59637}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HP.ClearingCenter.Application</RootNamespace>
+    <AssemblyName>HP.ClearingCenter.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.42\lib\net40\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.6.1.0.0\lib\portable-net40+sl50+wp80+win8+wpa81\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+    </Reference>
+    <Reference Include="PagedList.Mvc">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\Contracts\AdviseClearingCenterProductRequest.cs" />
+    <Compile Include="Api\Contracts\AdviseClearingCenterProductResponse.cs" />
+    <Compile Include="Api\Contracts\ConfirmProcessStatusReceptionRequest.cs" />
+    <Compile Include="Api\Contracts\GetProductListRequest.cs" />
+    <Compile Include="Api\Contracts\GetProductListResponse.cs" />
+    <Compile Include="Api\Contracts\IApiResult.cs" />
+    <Compile Include="Api\Contracts\EchoRequest.cs" />
+    <Compile Include="Api\Contracts\ResponseResult.cs" />
+    <Compile Include="Api\Data\ContactAddress.cs" />
+    <Compile Include="Api\Data\CustomAttribute.cs" />
+    <Compile Include="Api\Data\Order.cs" />
+    <Compile Include="Api\Data\OrderPosition.cs" />
+    <Compile Include="Api\Data\Product.cs" />
+    <Compile Include="Api\Data\ProductGroupData.cs" />
+    <Compile Include="Api\Data\StatusData.cs" />
+    <Compile Include="Api\Data\TransportProcessData.cs" />
+    <Compile Include="Configuration\DomainSettings.cs" />
+    <Compile Include="Data\ClearingCenterDataContext.cs" />
+    <Compile Include="Data\Configuration\Data.CustomAttributes.cs" />
+    <Compile Include="Data\Configuration\Data.ProductGroups.cs" />
+    <Compile Include="Data\Configuration\Data.Products.cs" />
+    <Compile Include="Data\Configuration\Data.TransactionTransports.cs" />
+    <Compile Include="Data\Configuration\Data.Users.cs" />
+    <Compile Include="Data\Configuration\DbInitializer.cs" />
+    <Compile Include="Data\DataContextAdapter.cs" />
+    <Compile Include="Data\Dto\Address.cs" />
+    <Compile Include="Data\Dto\CategoryData.cs" />
+    <Compile Include="Data\Dto\CategoryFilterAttributeData.cs" />
+    <Compile Include="Data\Dto\CountryData.cs" />
+    <Compile Include="Data\Dto\CustomAttributeData.cs" />
+    <Compile Include="Data\Dto\FilterOperatorData.cs" />
+    <Compile Include="Data\Dto\KeyValueData.cs" />
+    <Compile Include="Data\Dto\ManufacturerData.cs" />
+    <Compile Include="Data\Dto\PasswordData.cs" />
+    <Compile Include="Data\Dto\ProductCustomAttributeValueData.cs" />
+    <Compile Include="Data\Dto\ProductData.cs" />
+    <Compile Include="Data\Dto\ProductGroupCategoryData.cs" />
+    <Compile Include="Data\Dto\ProductGroupData.cs" />
+    <Compile Include="Data\Dto\ReturnObjectData.cs" />
+    <Compile Include="Data\Entities\ApplicationUser.cs" />
+    <Compile Include="Data\Entities\Country.cs" />
+    <Compile Include="Data\Entities\CustomAttribute.cs" />
+    <Compile Include="Data\Entities\CustomAttributeDataType.cs" />
+    <Compile Include="Data\Entities\OptionListItem.cs" />
+    <Compile Include="Data\Entities\Translator.cs" />
+    <Compile Include="Data\Configuration\Migrations.cs" />
+    <Compile Include="Data\Configuration\Data.cs" />
+    <Compile Include="Data\Entities\_Enums.cs" />
+    <Compile Include="Data\Schemas.cs" />
+    <Compile Include="Domain.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Domain.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Localization\CommandHandlers\AddOrUpdateTranslationCommandHandler.cs" />
+    <Compile Include="Localization\Commands\AddOrUpdateTranslationCommand.cs" />
+    <Compile Include="Localization\Texts\Common.cs" />
+    <Compile Include="Localization\Texts\Page.cs" />
+    <Compile Include="ProductGroups\CommandHandlers\AddCategoryAttributeFilterCommandHandler.cs" />
+    <Compile Include="ProductGroups\CommandHandlers\AddProductGroupCommandHandler.cs" />
+    <Compile Include="ProductGroups\CommandHandlers\AddProductGroupFilterCategoryCommandHandler.cs" />
+    <Compile Include="ProductGroups\CommandHandlers\RemoveCategoryAttributeFilterCommandHandler.cs" />
+    <Compile Include="ProductGroups\CommandHandlers\RemoveProductCategoryCommandHandler.cs" />
+    <Compile Include="ProductGroups\Commands\AddCategoryAttributeFilterCommand.cs" />
+    <Compile Include="ProductGroups\Commands\AddProductGroupCommand.cs" />
+    <Compile Include="ProductGroups\Commands\AddProductGroupFilterCategoryCommand.cs" />
+    <Compile Include="ProductGroups\Commands\RemoveCategoryAttributeFilterCommand.cs" />
+    <Compile Include="ProductGroups\Commands\RemoveCategoryCommand.cs" />
+    <Compile Include="ProductGroups\Entities\ProductFilterOperator.cs" />
+    <Compile Include="ProductGroups\Entities\ProductGroupCategory.cs" />
+    <Compile Include="ProductGroups\Entities\_Enums.cs" />
+    <Compile Include="ProductGroups\Entities\ProductGroup.cs" />
+    <Compile Include="ProductGroups\Entities\ProductFilter.cs" />
+    <Compile Include="ProductGroups\Queries\GetProductCategoryFiltersQuery.cs" />
+    <Compile Include="ProductGroups\QueryHandlers\Builders\CategoryAttributeFiltersSqlBuilder.cs" />
+    <Compile Include="ProductGroups\QueryHandlers\Builders\GetReturnObjectGroupsSqlBuilder.cs" />
+    <Compile Include="ProductGroups\Queries\GetReturnObjectsByProductGroupCodeQuery.cs" />
+    <Compile Include="ProductGroups\Queries\ProductGroupSearchQuery.cs" />
+    <Compile Include="ProductGroups\QueryHandlers\GetProductCategoryFiltersQueryHandler.cs" />
+    <Compile Include="ProductGroups\QueryHandlers\GetReturnObjectsByProductGroupCodeQueryHandler.cs" />
+    <Compile Include="ProductGroups\QueryHandlers\ProductGroupSearchQueryHandler.cs" />
+    <Compile Include="Products\CommandHandlers\AddCategoryAttributeCommandHandler.cs" />
+    <Compile Include="Products\CommandHandlers\AddOrUpdateCategoryCommandHandler.cs" />
+    <Compile Include="Products\CommandHandlers\AddOrUpdateCustomAttributeCommandHandler.cs" />
+    <Compile Include="Products\CommandHandlers\AddOrUpdateManufacturerCommandHandler.cs" />
+    <Compile Include="Products\CommandHandlers\AddOrUpdateProductCommandHandler.cs" />
+    <Compile Include="Products\CommandHandlers\RemoveCategoryAttributeCommandHandler.cs" />
+    <Compile Include="Products\CommandHandlers\SubmitProductAttributesCommandHandler.cs" />
+    <Compile Include="Products\Commands\AddOrUpdateProductCommand.cs" />
+    <Compile Include="Products\Commands\RemoveCategoryAttributeCommand.cs" />
+    <Compile Include="Products\Commands\AddCategoryAttributeCommand.cs" />
+    <Compile Include="Products\Commands\AddOrUpdateCategoryCommand.cs" />
+    <Compile Include="Products\Commands\AddOrUpdateCustomAttributeCommand.cs" />
+    <Compile Include="Products\Commands\AddOrUpdateManufacturerCommand.cs" />
+    <Compile Include="Products\Commands\SubmitProductAttributesCommand.cs" />
+    <Compile Include="Products\Entities\Category.cs" />
+    <Compile Include="Products\Entities\CategoryAttributeAssignment.cs" />
+    <Compile Include="Products\Entities\Manufacturer.cs" />
+    <Compile Include="Products\Entities\Product.cs" />
+    <Compile Include="Products\Entities\ProductCustomAttributeValue.cs" />
+    <Compile Include="Products\Queries\GetAvailableAttributesQuery.cs" />
+    <Compile Include="Products\Queries\GetCategoryAttributesQuery.cs" />
+    <Compile Include="Products\Queries\GetCustomAttributeQuery.cs" />
+    <Compile Include="Products\Queries\GetProductAttributeValuesQuery.cs" />
+    <Compile Include="Products\Queries\ProductCategorySearchQuery.cs" />
+    <Compile Include="Products\Queries\SearchManufacturersQuery.cs" />
+    <Compile Include="Products\Queries\SimpleSearchProductsQuery.cs" />
+    <Compile Include="Products\QueryHandlers\GetAvailableAttributesQueryHandler.cs" />
+    <Compile Include="Products\QueryHandlers\GetCategoryAttributesQueryHandler.cs" />
+    <Compile Include="Products\QueryHandlers\GetCustomAttributeQueryHandler.cs" />
+    <Compile Include="Products\QueryHandlers\GetProductAttributeValuesQueryHandler.cs" />
+    <Compile Include="Products\QueryHandlers\ProductCategorySearchQueryHandler.cs" />
+    <Compile Include="Products\QueryHandlers\SearchManufacturersQueryHandler.cs" />
+    <Compile Include="Products\QueryHandlers\SimpleSearchProductQueryHandler.cs" />
+    <Compile Include="Products\QueryHandlers\Utils.cs" />
+    <Compile Include="Security\CommandHandlers\AuthenticateApiRequestCommandHandler.cs" />
+    <Compile Include="Security\CommandHandlers\SignInCommandHandler.cs" />
+    <Compile Include="Security\Commands\AuthenticateApiRequestCommand.cs" />
+    <Compile Include="Security\Commands\SignInCommand.cs" />
+    <Compile Include="Security\Services\AuthorizationProvider.cs" />
+    <Compile Include="Security\Services\SecureAccessRights.cs" />
+    <Compile Include="Services\ConfigurationProvider.cs" />
+    <Compile Include="Services\TranslationProvider.cs" />
+    <Compile Include="Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="TransactionTransports\CommandHandlers\AdviseClearingCenterProductCommandHandler.cs" />
+    <Compile Include="TransactionTransports\CommandHandlers\ClearReceivedProductCommandHandler.cs" />
+    <Compile Include="TransactionTransports\CommandHandlers\ConfirmClearedProductsReceptionCommandHandler.cs" />
+    <Compile Include="TransactionTransports\CommandHandlers\ConfirmReceivedProductsReceptionCommandHandler.cs" />
+    <Compile Include="TransactionTransports\CommandHandlers\ReceiveProductCommandHandler.cs" />
+    <Compile Include="TransactionTransports\Commands\AdviseClearingCenterProductCommand.cs" />
+    <Compile Include="TransactionTransports\Commands\ClearReceivedProductCommand.cs" />
+    <Compile Include="TransactionTransports\Commands\ConfirmClearedProductsReceptionCommand.cs" />
+    <Compile Include="TransactionTransports\Commands\ConfirmReceivedProductsReceptionCommand.cs" />
+    <Compile Include="TransactionTransports\Commands\ReceiveProductCommand.cs" />
+    <Compile Include="TransactionTransports\Entities\ClearingCenter.cs" />
+    <Compile Include="TransactionTransports\Entities\ClearingProcessType.cs" />
+    <Compile Include="TransactionTransports\Entities\ForwardingInstruction.cs" />
+    <Compile Include="TransactionTransports\Entities\LocalProgram.cs" />
+    <Compile Include="TransactionTransports\Entities\StatusCode.cs" />
+    <Compile Include="TransactionTransports\Entities\TransactionDetail.cs" />
+    <Compile Include="TransactionTransports\Entities\TransactionHeader.cs" />
+    <Compile Include="TransactionTransports\Entities\_Enums.cs" />
+    <Compile Include="TransactionTransports\Entities\MarketingProgram.cs" />
+    <Compile Include="TransactionTransports\Entities\MarketingProgramType.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransactionTransports\Entities\_TransactionTransportsData.cs" />
+    <Compile Include="TransactionTransports\Queries\ForwardingInstructionsQuery.cs" />
+    <Compile Include="TransactionTransports\Queries\GetClearedProductsQuery.cs" />
+    <Compile Include="TransactionTransports\Queries\GetReceivedProductsQuery.cs" />
+    <Compile Include="TransactionTransports\Queries\StatusCodeQuery.cs" />
+    <Compile Include="TransactionTransports\Queries\TransactionTransportQuery.cs" />
+    <Compile Include="TransactionTransports\Queries\ValidateClearingProductQuery.cs" />
+    <Compile Include="TransactionTransports\QueryHandlers\ForwardingInstructionsQueryHandler.cs" />
+    <Compile Include="TransactionTransports\QueryHandlers\GetClearedProductsQueryHandler.cs" />
+    <Compile Include="TransactionTransports\QueryHandlers\GetReceivedProductsQueryHandler.cs" />
+    <Compile Include="TransactionTransports\QueryHandlers\StatusCodeQueryHandler.cs" />
+    <Compile Include="TransactionTransports\QueryHandlers\TransactionTransportQueryHandler.cs" />
+    <Compile Include="TransactionTransports\QueryHandlers\ValidateClearingProductQueryHandler.cs" />
+    <Compile Include="TransactionTransports\QueryResults\IForwardingInstruction.cs" />
+    <Compile Include="TransactionTransports\QueryResults\IStatusCode.cs" />
+    <Compile Include="TransactionTransports\QueryResults\TransactionTransportData.cs" />
+    <Compile Include="TransactionTransports\QueryResults\ValidateClearingProductResult.cs" />
+    <Compile Include="TransactionTransports\Validators\OrderAdviseValidator.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HP.ClearingCenter.Infrastructure\HP.ClearingCenter.Infrastructure.csproj">
+      <Project>{fbc48d30-9dd5-4138-92f1-0bdd32cab96b}</Project>
+      <Name>HP.ClearingCenter.Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Domain.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Domain.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProductGroups\QueryHandlers\Sql\GetReturnObjects.query.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProductGroups\QueryHandlers\Sql\ProductByCategoryCode.template.sql" />
+    <EmbeddedResource Include="ProductGroups\QueryHandlers\Sql\ProductGroupCategoryFilters.template.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\PagedList.css" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,42 @@
+﻿@model HP.ClearingCenter.Application.TransactionTransports.QueryResults.TransactionTransportData
+<table>
+    <tr>
+        <td>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Text.Common, x => x.TransportNumber)</td>
+        <td>@Model.TransportNumber</td>
+    </tr>
+    <tr>
+        <td>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Text.Common, x => x.QuoteNumber)</td>
+        <td>@Model.QuoteNumber</td>
+    </tr>
+    <tr>
+        <td>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Text.Common, x => x.ProgramName)</td>
+        <td>@Model.ProgramNumber - @Model.ProgramName (@Model.ProgramType)</td>
+    </tr>
+    <tr>
+        <td>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Text.Common, x => x.ProductName)</td>
+        <td>@Model.ProductAdvised.Manufacturer @Model.ProductAdvised.ProductName (@Model.ProductAdvised.ProductNumber)</td>
+    </tr>
+    <tr>
+        <td>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Text.Common, x => x.UnitsAdvised)</td>
+        <td>@Model.UnitsAdvised</td>
+    </tr>
+    <tr>
+        <td>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Text.Common, x => x.PickupDate)</td>
+        <td>@Model.PickupDate</td>
+    </tr>
+    <tr>
+        <td>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Text.Common, x => x.Status)</td>
+        <td>@Model.ReceivingStatus.ShortName (@Model.ReceivingStatus.ExternalCode)</td>
+    </tr>
+    @if (Model.ReceivingDate.HasValue)
+    {
+        <tr>
+            <td>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Text.Common, x => x.ReceivingDate)</td>
+            <td>@Model.ReceivingDate</td>
+        </tr>
+        <tr>
+            <td>@Html.TranslateWithEditor(HP.ClearingCenter.Application.Text.Common, x => x.ReceivedBy)</td>
+            <td>@Model.ReceivedBy</td>
+        </tr>
+    }
+</table>

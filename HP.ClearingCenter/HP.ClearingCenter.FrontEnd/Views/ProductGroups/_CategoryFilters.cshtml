@@ -1,0 +1,31 @@
+﻿@model HP.ClearingCenter.FrontEnd.Models.ProductGroups.ProductGroupDetailsViewModel
+@{
+    var localTexts = HP.ClearingCenter.Application.Page.Texts;
+    var categories = (IEnumerable<HP.ClearingCenter.Application.Data.Dto.CategoryData>)ViewBag.Categories;
+    var categoryListBuilder = new HP.ClearingCenter.FrontEnd.Models.Categories.CategorySelectListBuilder(null, categories, false);
+    
+    
+    string addCategoryUrl = Url.Action("AddCategory", "ProductGroups");
+}
+<div>
+    @using (Html.BeginForm("AddCategory", "ProductGroups")) 
+    {
+        <div>
+            @Html.Hidden("ProductGroupId", Model.AddProductGroupFilterCategoryCommand.ProductGroupId)
+            <label for="CategoryExternalCode">Add Category</label>
+            @categoryListBuilder.Build("CategoryId")            
+            @Html.SubmitButton(localTexts, x => x.ProductGroupDetails_AddCategoryButton, new { @class = "button inline secondary" })
+        </div>        
+    }
+</div>
+
+<div>
+    <!-- show categories here -->
+    @foreach (var item in this.Model.AssignedCategories)
+    {
+        <!-- categories -->
+        @Html.Partial("_CategoryFilterDefinition", item);
+    }
+</div>
+
+
